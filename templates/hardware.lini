@@ -1,0 +1,234 @@
+# 通过hardware.toml，你可以对CSK芯片引脚进行配置，完成产测引脚配置、外围器件配置等工作。
+# 关于外围器件引脚配置，你可以访问 https://open.listenai.com/peripheral_config 阅读更详细的指南。
+# 关于产测相关配置，你可以访问 https://open.listenai.com/factory_config 阅读更详细的指南。
+#
+# 硬件信息
+boardname = "LSKIT_CSK4002_1.0.0"
+conf_version = "2_1.0.0.1002"
+description = "lskit csk4002核心板 1.0"
+
+# 
+# tag：表示pin脚的标记名，用于代码中匹配；
+# pin：表示引脚编号；
+# mux：表示功能选择，具体功能请查看具体芯片Datasheet。下载地址：
+# dir：表示IO方向，true：输出；false：输入；
+# def：表示默认电平（仅对dir为true时有意义）；
+# rev：表示逻辑电平和物理电平的匹配，true表示逻辑电平和物理电平一致，false表示逻辑电平和物理电平相反。
+#
+# 产测模式下的引脚配置
+[factory_gpio]
+
+    # 通过此引脚来决定是否进入产测模式；
+    # 只能配1个引脚；
+    # 只能为输入dir = false
+    [factory_gpio.check_enter]
+    tag = "enter"
+    pin = 12
+    mux = 0
+    dir = false
+  
+
+    # 用来输出音频检测结果（依次为 MIC1,MIC2,REF 信号检测结果）；只能配3个引脚，只能为输出（dir = true）。
+    [[factory_gpio.check_record]]
+    tag = "record0"
+    pin = 31
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+    [[factory_gpio.check_record]]
+    tag = "record1"
+    pin = 32
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+    [[factory_gpio.check_record]]
+    tag = "record2"
+    pin = 57
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+
+    # 用来检测 GPIO 的硬件连通性，CSK 控制这些引脚的电平，最多可配置10个引脚，只能为输出（dir = true）。
+    [[factory_gpio.check_gpios]]
+    tag = "gpio0"
+    pin = 22
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+    [[factory_gpio.check_gpios]]
+    tag = "gpio1"
+    pin = 23
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+    [[factory_gpio.check_gpios]]
+    tag = "gpio2"
+    pin = 24
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+    [[factory_gpio.check_gpios]]
+    tag = "gpio3"
+    pin = 26
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+    [[factory_gpio.check_gpios]]
+    tag = "gpio4"
+    pin = 35
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+    [[factory_gpio.check_gpios]]
+    tag = "gpio5"
+    pin = 55
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+    [[factory_gpio.check_gpios]]
+    tag = "gpio6"
+    pin = 56
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+    [[factory_gpio.check_gpios]]
+    tag = "gpio7"
+    pin = 59
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+    
+    [[factory_gpio.check_gpios]]
+    tag = "gpio8"
+    pin = 62
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+  
+
+# 外围器件引脚配置
+# uart预留3组
+# i2c预留2组
+# i2s预留1组
+# spi预留1组
+#
+[peripheral]
+
+    # urat引脚配置
+    [[peripheral.uart]]
+    
+    [[peripheral.uart]]
+    [peripheral.uart.txd]
+    pin = 55
+    mux = 2
+    
+    [peripheral.uart.rxd]
+    pin = 56
+    mux = 2
+    
+    [[peripheral.uart]]
+    [peripheral.uart.txd]
+    pin = 60
+    mux = 1
+    
+    [peripheral.uart.rxd]
+    pin = 19
+    mux = 2
+    
+
+    # i2c引脚配置
+    [[peripheral.i2c]]
+    
+    [[peripheral.i2c]]
+    [peripheral.i2c.scl]
+    pin = 29
+    mux = 2
+    
+    [peripheral.i2c.sda]
+    pin = 30
+    mux = 2
+    
+
+    # i2s引脚配置
+    [[peripheral.i2s]]
+        [peripheral.i2s.mclk]
+        pin = 37
+        mux = 1
+    
+        [peripheral.i2s.bclk]
+        pin = 34
+        mux = 1
+    
+        [peripheral.i2s.lrck]
+        pin = 33
+        mux = 1
+    
+        [peripheral.i2s.dout]
+        pin = 35
+        mux = 1
+    
+        [peripheral.i2s.din0]
+        pin = 36
+        mux = 1
+    
+
+    # spi引脚配置
+    [[peripheral.spi]]
+    [peripheral.spi.sclk]
+    pin = 4
+    mux = 1
+    
+    [peripheral.spi.miso]
+    pin = 4
+    mux = 1
+    
+    [peripheral.spi.mosi]
+    pin = 4
+    mux = 1
+    
+    [peripheral.spi.cs]
+    pin = 4
+    mux = 1
+    
+
+    # 系统就绪的io输出引脚配置
+    [[peripheral.gpio]]
+    tag = "rdy"
+    pin = 13
+    mux = 0
+    dir = true
+    def = false
+    rev = true
+
+    # PA的使能引脚配置
+    [[peripheral.gpio]]
+    tag = "amp"
+    pin = 14
+    mux = 0
+    dir = true
+    def = true
+    rev = true
+
+  

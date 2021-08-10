@@ -1,0 +1,44 @@
+{
+  "name": "@board/lskits-csk4002",
+  "version": "2.0.0",
+  "description": "LSkits csk4002核心板 硬件板型模板",
+  "author": "geekBoom.Zhao <zbzhao@listenai.com>",
+  "license": "MIT",
+  "keywords": [
+    "@source/csk4002"
+  ],
+  "overwriteKeywords": true,
+  "lisa": {
+    "taskPath": "./lib/task.js"
+  },
+  "publishConfig": {
+    "registry": "https://registry-lpm.listenai.com"
+  },
+  "files": [
+    "/lib",
+    "/templates"
+  ],
+  "scripts": {
+    "start": "./node_modules/.bin/ts-node src/index.ts",
+    "build": "./node_modules/.bin/tsc",
+    "prepublish": "npm run build",
+    "test": "npm run build && LISA_ENV=test ./node_modules/.bin/jest --coverage",
+    "test_watch": "LISA_ENV=test ./node_modules/.bin/jest --watch"
+  },
+  "dependencies": {
+    "@listenai/lisa_core": "^2",
+    "compare-versions": "^3.6.0"
+  },
+  "main": "./lib/index.js",
+  "devDependencies": {
+    "@generator/board": "^1.0.4",
+    "@types/jest": "^26.0.20",
+    "@types/minimist": "^1.2.1",
+    "jest": "^26.6.3",
+    "mock-stdin": "^1.0.0",
+    "ts-jest": "^26.5.2",
+    "ts-node": "^9.1.1",
+    "typedoc": "^0.20.28",
+    "typescript": "^4.1.5"
+  }
+}
