@@ -1,6 +1,6 @@
 {
   "name": "@board/lskits-csk4002",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "LSkits csk4002核心板 硬件板型模板",
   "author": "geekBoom.Zhao <zbzhao@listenai.com>",
   "license": "MIT",
@@ -9,7 +9,8 @@
   ],
   "overwriteKeywords": true,
   "lisa": {
-    "taskPath": "./lib/task.js"
+    "taskPath": "./lib/task.js",
+    "configPath": "./lib/config.js"
   },
   "publishConfig": {
     "registry": "https://registry-lpm.listenai.com"
